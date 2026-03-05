@@ -11,8 +11,8 @@ export default async function HomePage() {
   const role = (sessionClaims?.metadata as { role?: string })?.role;
 
   if (role === "owner") {
-    redirect("/dashboard");
+    redirect("/owner/dashboard");
   }
 
-  redirect("/search");
+  redirect("/player/search");
 }

@@ -1,5 +1,9 @@
 import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
+import { OwnerSidebar } from "@/components/layout/OwnerSidebar";
+import { BottomNav } from "@/components/layout/BottomNav";
+import { FieldProvider } from "@/lib/contexts/FieldContext";
+import { ToastProvider } from "@/components/ui/Toast";
 
 export default async function OwnerLayout({
   children,
@@ -9,19 +13,19 @@ export default async function OwnerLayout({
   const { sessionClaims } = await auth();
   const role = (sessionClaims?.metadata as { role?: string })?.role;
 
-  if (role !== "owner") {
-    redirect("/search");
-  }
+  if (role !== "owner") redirect("/player/search");
 
   return (
-    <div className="min-h-screen bg-zinc-50">
-      <nav className="border-b bg-white px-6 py-4">
-        <div className="mx-auto flex max-w-7xl items-center justify-between">
-          <span className="text-xl font-bold text-green-600">PitchBook</span>
-          <span className="text-sm text-zinc-500">Owner Dashboard</span>
+    <ToastProvider>
+      <FieldProvider>
+        <div className="flex min-h-screen bg-background">
+          <OwnerSidebar />
+          <main className="flex-1 min-w-0 pb-20 lg:pb-0">
+            {children}
+          </main>
+          <BottomNav role="owner" />
         </div>
-      </nav>
-      <main className="mx-auto max-w-7xl px-6 py-8">{children}</main>
-    </div>
+      </FieldProvider>
+    </ToastProvider>
   );
 }

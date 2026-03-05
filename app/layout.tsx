@@ -1,16 +1,24 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Syne, Inter, JetBrains_Mono } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
+import { AuthProvider } from "@/lib/contexts/AuthContext";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const syne = Syne({
+  variable: "--font-syne",
+  subsets: ["latin"],
+  display: "swap",
+  weight: ["400", "500", "600", "700", "800"],
+});
+
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
   display: "swap",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const jetbrainsMono = JetBrains_Mono({
+  variable: "--font-jetbrains-mono",
   subsets: ["latin"],
   display: "swap",
 });
@@ -33,11 +41,11 @@ export default function RootLayout({
 }>) {
   return (
     <ClerkProvider>
-      <html lang="en">
+      <html lang="es">
         <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+          className={`${syne.variable} ${inter.variable} ${jetbrainsMono.variable} antialiased`}
         >
-          {children}
+          <AuthProvider>{children}</AuthProvider>
         </body>
       </html>
     </ClerkProvider>
