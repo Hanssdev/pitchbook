@@ -2,7 +2,7 @@
 
 import { useState, useEffect, use, useCallback } from "react";
 import { useAuth } from "@clerk/nextjs";
-import { supabase } from "@/lib/supabase/client";
+import { supabaseUntyped as supabase } from "@/lib/supabase/untyped";
 import { useShareLink } from "@/hooks/useShareLink";
 import { Button } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";

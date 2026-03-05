@@ -3,7 +3,13 @@
 import { useState, useEffect, useCallback } from "react";
 import { useOwnerField } from "@/hooks/useOwnerField";
 import { useTimeBlocks } from "@/hooks/useTimeBlocks";
-import { supabase } from "@/lib/supabase/client";
+import { createClient } from "@supabase/supabase-js";
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const supabase = createClient<any>(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+);
 import { useToast } from "@/components/ui/Toast";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
@@ -252,7 +258,7 @@ export default function OwnerCalendarPage() {
                       "flex items-center justify-between rounded-lg border px-3 py-2.5 transition-colors",
                       state === "free"
                         ? "border-border bg-surface-2 hover:border-accent/30"
-                        : STATUS_COLORS[state === "free" ? "confirmed" : state]
+                        : STATUS_COLORS[state]
                     )}
                   >
                     <span className="font-mono text-sm text-text">

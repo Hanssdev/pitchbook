@@ -5,7 +5,13 @@ import Image from "next/image";
 import { useAuth } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
 import { useOwnerField } from "@/hooks/useOwnerField";
-import { supabase } from "@/lib/supabase/client";
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+import { createClient } from "@supabase/supabase-js";
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const supabase = createClient<any>(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+);
 import { Button } from "@/components/ui/Button";
 import { Input, Textarea } from "@/components/ui/Input";
 import { Card, CardHeader, CardTitle, CardBody } from "@/components/ui/Card";
@@ -219,7 +225,7 @@ export default function FieldSetupPage() {
                 min={0}
                 step={500}
                 placeholder="15000"
-                prefix="$"
+                startAdornment="$"
                 value={form.price_per_hour}
                 onChange={(e) => set("price_per_hour", e.target.value)}
                 required

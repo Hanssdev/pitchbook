@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
 import { Skeleton } from "@/components/ui/Skeleton";
 import { EmptyState } from "@/components/ui/EmptyState";
-import { supabase } from "@/lib/supabase/client";
+import { supabaseUntyped as supabase } from "@/lib/supabase/untyped";
 import { useEffect, useState } from "react";
 import type { Reservation } from "@/types";
 
@@ -125,9 +125,9 @@ export default function OwnerDashboardPage() {
             </svg>
           }
           action={
-            <Button as={Link as any} href="/owner/field/setup" variant="primary">
-              Registrar mi cancha
-            </Button>
+            <Link href="/owner/field/setup">
+              <Button variant="primary">Registrar mi cancha</Button>
+            </Link>
           }
         />
       )}

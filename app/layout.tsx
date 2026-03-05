@@ -40,7 +40,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ClerkProvider>
+    <ClerkProvider afterSignOutUrl="/sign-in">
       <html lang="es">
         <body
           className={`${syne.variable} ${inter.variable} ${jetbrainsMono.variable} antialiased`}

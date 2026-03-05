@@ -99,6 +99,29 @@ export interface Database {
           created_at?: string;
         };
       };
+      blocked_slots: {
+        Row: {
+          id: string;
+          field_id: string;
+          date: string;
+          time_block: string;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          field_id: string;
+          date: string;
+          time_block: string;
+          created_at?: string;
+        };
+        Update: {
+          id?: string;
+          field_id?: string;
+          date?: string;
+          time_block?: string;
+          created_at?: string;
+        };
+      };
       reservation_players: {
         Row: {
           id: string;

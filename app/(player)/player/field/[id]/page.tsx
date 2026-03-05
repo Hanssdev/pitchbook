@@ -4,7 +4,7 @@ import { useState, useEffect, use } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@clerk/nextjs";
-import { supabase } from "@/lib/supabase/client";
+import { supabaseUntyped as supabase } from "@/lib/supabase/untyped";
 import { useTimeBlocks } from "@/hooks/useTimeBlocks";
 import { TimeBlock } from "@/components/ui/TimeBlock";
 import { Button } from "@/components/ui/Button";

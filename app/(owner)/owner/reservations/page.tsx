@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react";
 import { useOwnerField } from "@/hooks/useOwnerField";
-import { supabase } from "@/lib/supabase/client";
+import { supabaseUntyped as supabase } from "@/lib/supabase/untyped";
 import { useToast } from "@/components/ui/Toast";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
@@ -54,7 +54,7 @@ export default function OwnerReservationsPage() {
         const row = r as Record<string, unknown>;
         const player = row.player as Record<string, string> | null;
         return {
-          ...(row as Reservation),
+          ...(row as unknown as Reservation),
           player_name: player?.name,
           player_phone: player?.phone,
           player_email: player?.email,
@@ -116,7 +116,7 @@ export default function OwnerReservationsPage() {
     return (
       <div className="p-6 lg:p-8 space-y-4">
         <Skeleton className="h-8 w-40" />
-        {Array.from({ length: 4 }).map((_, i) => <Skeleton key={i} className="h-24" rounded="xl" />)}
+        {Array.from({ length: 4 }).map((_, i) => <Skeleton key={i} className="h-24" rounded="lg" />)}
       </div>
     );
   }
@@ -158,7 +158,7 @@ export default function OwnerReservationsPage() {
       {/* Lista */}
       {loading ? (
         <div className="space-y-3">
-          {Array.from({ length: 4 }).map((_, i) => <Skeleton key={i} className="h-24" rounded="xl" />)}
+          {Array.from({ length: 4 }).map((_, i) => <Skeleton key={i} className="h-24" rounded="lg" />)}
         </div>
       ) : filtered.length === 0 ? (
         <EmptyState

@@ -93,7 +93,7 @@ export function OwnerSidebar() {
 
       {/* User */}
       <div className="px-4 py-4 border-t border-border flex items-center gap-3">
-        <UserButton afterSignOutUrl="/sign-in" />
+        <UserButton />
         <span className="text-xs text-muted truncate">Mi cuenta</span>
       </div>
     </aside>

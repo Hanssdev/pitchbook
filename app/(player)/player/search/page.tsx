@@ -3,7 +3,7 @@
 import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { supabase } from "@/lib/supabase/client";
+import { supabaseUntyped as supabase } from "@/lib/supabase/untyped";
 import { Card } from "@/components/ui/Card";
 import { Input } from "@/components/ui/Input";
 import { Button } from "@/components/ui/Button";
@@ -121,7 +121,7 @@ export default function SearchPage() {
             placeholder="Buscar por nombre o zona..."
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            prefix={
+            startAdornment={
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <circle cx="11" cy="11" r="8" /><line x1="21" y1="21" x2="16.65" y2="16.65" />
               </svg>
@@ -134,7 +134,7 @@ export default function SearchPage() {
             placeholder="Precio máx."
             value={maxPrice}
             onChange={(e) => setMaxPrice(e.target.value)}
-            prefix="$"
+            startAdornment="$"
           />
         </div>
       </div>

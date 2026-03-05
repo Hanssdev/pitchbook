@@ -45,7 +45,7 @@ export function PlayerNavbar() {
           })}
         </nav>
 
-        <UserButton afterSignOutUrl="/sign-in" />
+        <UserButton />
       </div>
     </header>
   );

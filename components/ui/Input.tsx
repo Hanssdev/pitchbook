@@ -5,31 +5,28 @@ import { twMerge } from "tailwind-merge";
 const cn = (...inputs: Parameters<typeof clsx>) => twMerge(clsx(inputs));
 
 /* ── Input ── */
-interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
+interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, "prefix"> {
   label?: string;
   error?: string;
   hint?: string;
-  prefix?: ReactNode;
-  suffix?: ReactNode;
+  startAdornment?: ReactNode;
+  endAdornment?: ReactNode;
 }
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(
-  ({ label, error, hint, prefix, suffix, className, id, ...props }, ref) => {
+  ({ label, error, hint, startAdornment, endAdornment, className, id, ...props }, ref) => {
     const inputId = id ?? label?.toLowerCase().replace(/\s/g, "-");
 
     return (
       <div className="flex flex-col gap-1.5">
         {label && (
-          <label
-            htmlFor={inputId}
-            className="text-sm font-medium text-text"
-          >
+          <label htmlFor={inputId} className="text-sm font-medium text-text">
             {label}
           </label>
         )}
         <div className="relative flex items-center">
-          {prefix && (
-            <span className="absolute left-3 text-muted text-sm">{prefix}</span>
+          {startAdornment && (
+            <span className="absolute left-3 text-muted text-sm pointer-events-none">{startAdornment}</span>
           )}
           <input
             ref={ref}
@@ -40,14 +37,14 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
               "focus:border-accent/60 focus:outline-none focus:ring-1 focus:ring-accent/30",
               "disabled:opacity-40 disabled:cursor-not-allowed",
               error && "border-red-500/50 focus:border-red-500/60 focus:ring-red-500/20",
-              prefix && "pl-9",
-              suffix && "pr-9",
+              startAdornment && "pl-9",
+              endAdornment && "pr-9",
               className
             )}
             {...props}
           />
-          {suffix && (
-            <span className="absolute right-3 text-muted text-sm">{suffix}</span>
+          {endAdornment && (
+            <span className="absolute right-3 text-muted text-sm pointer-events-none">{endAdornment}</span>
           )}
         </div>
         {error && <p className="text-xs text-red-400">{error}</p>}
@@ -99,7 +96,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
 Textarea.displayName = "Textarea";
 
 /* ── Select ── */
-interface SelectProps extends InputHTMLAttributes<HTMLSelectElement> {
+interface SelectProps extends Omit<InputHTMLAttributes<HTMLSelectElement>, "size"> {
   label?: string;
   error?: string;
   options: { value: string; label: string }[];
@@ -127,7 +124,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
             error && "border-red-500/50",
             className
           )}
-          {...props}
+          {...(props as React.SelectHTMLAttributes<HTMLSelectElement>)}
         >
           {options.map((opt) => (
             <option key={opt.value} value={opt.value}>

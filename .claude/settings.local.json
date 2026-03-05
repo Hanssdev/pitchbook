@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm run:*)",
+      "Bash(taskkill:*)",
+      "Bash(npx next:*)",
+      "Bash(mkdir:*)",
+      "Bash(rm:*)",
+      "Bash(do:*)",
+      "Bash(sed:*)",
+      "Bash(node:*)",
+      "Bash(xargs grep:*)"
+    ]
+  }
+}
