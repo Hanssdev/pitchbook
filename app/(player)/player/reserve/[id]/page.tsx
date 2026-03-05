@@ -15,8 +15,8 @@ function generateSlug(): string {
   return Math.random().toString(36).slice(2, 10);
 }
 
-export default function ReservePage({ params }: { params: Promise<{ fieldId: string }> }) {
-  const { fieldId } = use(params);
+export default function ReservePage({ params }: { params: Promise<{ id: string }> }) {
+  const { id: fieldId } = use(params);
   const { userId } = useAuth();
   const router = useRouter();
   const searchParams = useSearchParams();
